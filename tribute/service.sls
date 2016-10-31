@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "tribute/map.jinja" import tribute with context %}
 
-template-name:
-  service.running:
-    - name: {{ template.service.name }}
-    - enable: True
+include:
+  - tribute.install
+  - tribute.config
+
+tribute-container:
+  dockerng.running:
+    - name: {{ tribute.name }}
+    - image: {{ tribute.image }}
+    - binds: {{ tribute.config }}:/usr/src/app/config.yaml
+    - require:
+      - dockerng: tribute-image
+    - watch:
+      - file: tribute-config

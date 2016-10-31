@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "tribute/map.jinja" import tribute with context %}
 
-template-pkg:
-  pkg.installed:
-    - name: {{ template.pkg }}
+tribute-image:
+  dockerng.image_present:
+    - name: {{ tribute.image }}
+    - force: True

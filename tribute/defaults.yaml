@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-template:
-  pkg: template
-  config: '/etc/template'
-  service:
-    name: template
+tribute:
+  image: mattparlette/tribute
+  name: tribute
+  config: /etc/tribute/config.yaml
+  branch:
+    production: master
+    development: develop

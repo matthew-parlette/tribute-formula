@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "tribute/map.jinja" import tribute with context %}
 
-template-config:
+tribute-config:
   file.managed:
-    - name: {{ template.config }}
-    - source: salt://template/files/example.tmpl
-    - mode: 644
+    - name: {{ tribute.config }}
+    - makedirs: True
+    - source: salt://tribute/files/config.yaml.jinja
+    - template: jinja
+    - mode: 600
     - user: root
     - group: root

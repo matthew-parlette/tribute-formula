@@ -2,6 +2,6 @@
 # vim: ft=sls
 
 include:
-  - template.install
-  - template.config
-  - template.service
+  - tribute.install
+  - tribute.config
+  - tribute.service
