@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "tribute//map.jinja" import tribute with context %}
+{% from "tribute/development/map.jinja" import tribute with context %}
 
-tribute-image:
+tribute-development-image:
   dockerng.image_present:
     - name: {{ tribute.image }}:{{ tribute.branch }}
     - force: True

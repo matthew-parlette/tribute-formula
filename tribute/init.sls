@@ -3,5 +3,5 @@
 
 include:
   - tribute.install
-  - tribute.config
+  # - tribute.config
   - tribute.service

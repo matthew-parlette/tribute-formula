@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{% import_yaml 'tribute/development/defaults.yaml' as default_settings %}
+
+{% set os_family_map = salt['grains.filter_by']({
+        'Debian': {},
+        'Suse': {},
+        'Arch': {},
+        'RedHat': {},
+  }
+  , grain="os_family"
+  , merge=salt['pillar.get']('tribute:development:lookup'))
+%}
+{% do default_settings.tribute.update(os_family_map) %}
+
+{% set tribute = salt['pillar.get'](
+        'tribute:development',
+        default=default_settings.tribute,
+        merge=True
+    )
+%}

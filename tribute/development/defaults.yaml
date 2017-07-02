@@ -2,7 +2,7 @@
 # vim: ft=yaml
 tribute:
   image: mattparlette/tribute
-  name: tribute
-  branch: latest
+  name: tribute-dev
+  branch: develop
   environment:
-    RAILS_ENV: production
+    RAILS_ENV: development

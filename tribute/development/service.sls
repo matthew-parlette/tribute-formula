@@ -1,26 +1,30 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "tribute/map.jinja" import tribute with context %}
+{% from "tribute/development/map.jinja" import tribute with context %}
 
 include:
-  - tribute.install
+  - tribute.development.install
 
-tribute-database:
+tribute-development-database:
   file.touch:
     - name: {{ tribute.database }}
+    - makedirs: True
 
-tribute-public:
+tribute-development-public:
   file.directory:
     - name: {{ tribute.public }}
+    - makedirs: True
 
-tribute-container:
+tribute-development-container:
   dockerng.running:
     - name: {{ tribute.name }}
     - image: {{ tribute.image }}:{{ tribute.branch }}
+    {%- if tribute.has_key('database') %}
     - binds:
-      - {{ tribute.database }}:/usr/src/app/db/production.sqlite3:rw
+      - {{ tribute.database }}:/usr/src/app/db/development.sqlite3:rw
       - {{ tribute.public }}:/usr/src/app/public:rw
+    {%- endif %}
     - port_bindings:
       - {{ tribute.port }}:3000
     {%- if tribute.environment %}
@@ -30,4 +34,6 @@ tribute-container:
       {%- endfor %}
     {%- endif %}
     - require:
-      - dockerng: tribute-image
+      - dockerng: tribute-development-image
+      - file: tribute-development-database
+      - file: tribute-development-public
